@@ -1,0 +1,118 @@
+-- ========================================
+-- TABELA: USUARIOS
+-- ========================================
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    apelido VARCHAR(100),
+    email VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    data_nascimento DATE,
+    nivel INT DEFAULT 2,
+    status INT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ========================================
+-- TABELA: TAG_INTERESSE
+-- ========================================
+CREATE TABLE tag_interesse (
+    id_interesse INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    img VARCHAR(255)
+);
+
+-- ========================================
+-- TABELA: USER_INTERESSE
+-- ========================================
+CREATE TABLE user_interesse (
+    id_user_interesse INT AUTO_INCREMENT PRIMARY KEY,
+    id_interesse INT NOT NULL,
+    id_user INT NOT NULL,
+    FOREIGN KEY (id_interesse) REFERENCES tag_interesse(id_interesse) ON DELETE CASCADE,
+    FOREIGN KEY (id_user) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- ========================================
+-- TABELA: TRILHA
+-- ========================================
+CREATE TABLE trilha (
+    id_trilha INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(150) NOT NULL,
+    descricao TEXT,
+    img VARCHAR(255),
+    id_tag_interesse INT,
+    id_usuario INT NOT NULL,
+    nivel INT DEFAULT 0,
+    data_criacao DATE,
+    status INT DEFAULT 1,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_tag_interesse) REFERENCES tag_interesse(id_interesse) ON DELETE SET NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- ========================================
+-- TABELA: CURSOS
+-- ========================================
+CREATE TABLE cursos (
+    id_curso INT AUTO_INCREMENT PRIMARY KEY,
+    id_trilha INT NOT NULL,
+    nome VARCHAR(150) NOT NULL,
+    descricao TEXT,
+    aula_texto TEXT,
+    aula_video TEXT,
+    duracao INT, -- duração em minutos (INT)
+    ordem INT,
+    nivel INT DEFAULT 0,
+    data_criacao DATE,
+    status INT DEFAULT 1,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_trilha) REFERENCES trilha(id_trilha) ON DELETE CASCADE
+);
+
+-- ========================================
+-- TABELA: PROGRESSO_CURSOS
+-- ========================================
+CREATE TABLE progresso_cursos (
+    id_progresso INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    id_curso INT NOT NULL,
+    data_inicio DATE,
+    data_conclusao DATE,
+    status INT COMMENT '0=Não iniciado, 1=Em andamento, 2=Concluído',
+    FOREIGN KEY (id_user) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) ON DELETE CASCADE,
+    UNIQUE (id_user, id_curso)
+);
+
+-- ========================================
+-- TABELA: PROGRESSO_TRILHA
+-- ========================================
+CREATE TABLE progresso_trilha (
+    id_progresso INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    id_trilha INT NOT NULL,
+    data_inicio DATE,
+    data_conclusao DATE,
+    status INT COMMENT '0=Não iniciado, 1=Em andamento, 2=Concluído',
+    FOREIGN KEY (id_user) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_trilha) REFERENCES trilha(id_trilha) ON DELETE CASCADE,
+    UNIQUE (id_user, id_trilha)
+);
+
+-- ========================================
+-- TABELA: MEUS_INTERESSES
+-- ========================================
+CREATE TABLE meusInteresses (
+    id_meu_interesse INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    id_trilha INT NOT NULL,
+    data_adicao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_user) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_trilha) REFERENCES trilha(id_trilha) ON DELETE CASCADE,
+
+    UNIQUE (id_user, id_trilha)
+);
