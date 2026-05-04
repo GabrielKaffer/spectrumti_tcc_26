@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f1e2b;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e3a4f;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+
+.voltar {
+    color: #00bfff;
+    text-decoration: none;
+}
+
+.header-info {
+    flex: 2;
+}
+
+.header-side {
+    flex: 1;
+}
+
+.barra {
+    background: #333;
+    height: 8px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.barra-fill {
+    height: 100%;
+    background: #00bfff;
+    width: 30%;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+/* CONTEÚDO */
+.content {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+}
+
+/* AULA */
+.aula {
+    flex: 3;
+    background: #1e3a4f;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.aula h2 {
+    margin-top: 0;
+}
+
+/* TEXTO */
+#conteudo-aula {
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* BLOCO DE CÓDIGO */
+.code {
+    background: #0b1620;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: monospace;
+}
+
+/* SIDEBAR */
+.sidebar {
+    flex: 1;
+    background: #1e3a4f;
+    padding: 15px;
+    border-radius: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.aula-item {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+}
+
+.aula-item:hover {
+    background: #2a4d66;
+}
+
+.aula-item.ativa {
+    background: #007bff;
+}

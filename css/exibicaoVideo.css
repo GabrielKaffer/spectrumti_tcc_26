@@ -1,0 +1,140 @@
+/* Reset básico para remover margens padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Cabeçalho */
+.course-header {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.badge {
+    background: #e1e1e1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge.concluido { background: #27ae60; color: white; }
+.badge.em-andamento { background: #f39c12; color: white; }
+
+/* Controles de Alternância */
+.view-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.view-controls button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.view-controls button.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Área de Conteúdo */
+#content-area {
+    background: #fff;
+    min-height: 300px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Container de Vídeo Responsivo (Truque do Aspect Ratio) */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Estilização do Texto Renderizado */
+.text-content h1, .text-content h2 { margin-bottom: 15px; color: #007bff; }
+.text-content p { margin-bottom: 10px; }
+
+/* Input Manual */
+.manual-input {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.manual-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Rodapé */
+.course-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary { background: #27ae60; color: white; }
+.btn-secondary { background: #7f8c8d; color: white; }
+
+/* Responsividade Mobile */
+@media (max-width: 600px) {
+    .header-top { flex-direction: column; align-items: flex-start; }
+    .badge { margin-top: 10px; }
+}

@@ -1,0 +1,135 @@
+:root {
+    --primary: #1B3C53;
+    --btn-main: #234C6A;
+    --btn-sec: #456882;
+    --bg: #D2C1B6;
+    --white: #ffffff;
+    --radius: 10px;
+    --transition: all 0.25s ease;
+    --shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+.container-aulas {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 25px;
+    padding: 30px 5%;
+    max-width: 1450px;
+    margin: auto;
+    align-items: start;
+}
+
+/* Editor Area */
+.editor-area .card {
+    padding: 30px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.card-header-aula {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header-aula h2 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Sidebar */
+.sidebar-aulas .card {
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.sidebar-title {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--bg);
+    padding-bottom: 10px;
+}
+
+.lista-aulas-scroll {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.aula-item {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.aula-item:hover {
+    border-color: var(--btn-sec);
+    background: #f8fafc;
+}
+
+.aula-item.active {
+    border-left: 4px solid var(--btn-main);
+    background: #f0f4f7;
+}
+
+.aula-item span {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--btn-sec);
+    display: block;
+}
+
+.aula-item h4 {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+/* Video Preview */
+.video-container {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 8px;
+    background: #000;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.info-metadados p {
+    margin: 2px 0;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.actions-aula {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .container-aulas { grid-template-columns: 1fr; }
+    .sidebar-aulas { order: -1; }
+    .sidebar-aulas .card { position: static; }
+}

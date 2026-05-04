@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School - Minhas Trilhas</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../Imagens/logo.png" alt="Logo" class="logo">
+                <span class="school-name">SpectrumTI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="trilha_cursos.html">Minha Página</a>
+                <a href="#">Meus Certificados</a> 
+                <a href="#">Ensine na Spectrum</a>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span>Olá,</span>
+                <strong id="user-name">Usuário</strong>
+            </div>
+            <div id="user-icon" class="user-icon">👤</div>
+            <div id="user-dropdown" class="user-dropdown">
+                <a href="perfil.html">Perfil</a>
+                <a href="../backend/logout.php">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <section class="course-section">
+            <h2 class="section-title">Meus Interesses</h2>
+            <div class="cards-grid" id="grid-interesse"></div>
+        </section>
+
+        <section class="course-section">
+            <h2 class="section-title">Minhas Trilhas</h2>
+            <div class="cards-grid" id="grid-minhas-trilhas"></div>
+        </section>
+
+        <section class="course-section">
+            <h2 class="section-title">Recomendados</h2>
+            <div class="cards-grid" id="grid-recomendados"></div>
+            <div class="section-footer">
+    <a href="todas_trilhas.html" class="btn-ver-todas">
+        Ver todas as trilhas
+    </a>
+</div>
+        </section>
+
+    </main>
+
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

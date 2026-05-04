@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Escola</title>
+    <link rel="stylesheet" href="../css/cadastro.css?v=1">
+</head>
+<body>
+
+    <div id="overlay-bg" class="background-overlay"></div>
+
+    <a id="btn-voltar" href="../index.html" class="back-button">← Voltar</a>
+
+    <main id="main-content" class="content">
+        <div id="card-cadastro" class="login-card">
+            <h1 id="titulo-cadastro">Cadastro</h1>
+            <hr class="divider">
+            
+            <!-- IMPORTANTE: action + method -->
+            <form id="form-cadastro" action="../backend/cadastro.php" method="POST">
+                <input type="hidden" name="redirect" value="../html/cadastro.html">
+
+                <div class="input-group">
+                    <label for="input-nome">Nome</label>
+                    <input type="text" id="input-nome" name="nome" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-apelido">Apelido</label>
+                    <input type="text" id="input-apelido" name="apelido" placeholder="Seu apelido" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-telefone">Telefone</label>
+                    <input type="tel" id="input-telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-cpf">CPF</label>
+                    <input type="text" id="input-cpf" name="cpf" placeholder="000.000.000-00" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-data-nascimento">Data de nascimento</label>
+                    <input type="date" id="input-data-nascimento" name="data_nascimento" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-senha">Senha</label>
+                    <input type="password" id="input-senha" name="senha" placeholder="******" required>
+
+                    <div id="password-rules" class="password-rules">
+                        <div id="rule-length" class="invalid">• Mínimo 8 caracteres</div>
+                        <div id="rule-upper" class="invalid">• 1 letra maiúscula</div>
+                        <div id="rule-lower" class="invalid">• 1 letra minúscula</div>
+                        <div id="rule-number" class="invalid">• 1 número</div>
+                        <div id="rule-special" class="invalid">• 1 caractere especial</div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-confirmar-senha">Confirmação de senha</label>
+                    <input type="password" id="input-confirmar-senha" name="confirmar_senha" placeholder="******" required>
+                </div>
+
+                <!-- feedback de validação -->
+                <div id="form-feedback" role="alert" aria-live="assertive" class="form-feedback" style="color:#b00020; margin:8px 0; display:none;"></div>
+
+                <button type="submit" id="btn-cadastrar" class="btn-acessar">Cadastrar</button>
+                
+                <div class="footer-link">
+                    <a id="link-login" href="../html/login.html">Já tem uma conta? Entre aqui</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // ...existing code...
+        const senhaInput = document.getElementById("input-senha");
+        const confirmarInput = document.getElementById("input-confirmar-senha");
+        const form = document.getElementById("form-cadastro");
+        const feedback = document.getElementById("form-feedback");
+
+        // atualiza regras visuais enquanto digita
+        senhaInput.addEventListener("input", function() {
+            const senha = senhaInput.value;
+
+            const rules = {
+                length: senha.length >= 8,
+                upper: /[A-Z]/.test(senha),
+                lower: /[a-z]/.test(senha),
+                number: /[0-9]/.test(senha),
+                special: /[^A-Za-z0-9]/.test(senha)
+            };
+
+            document.getElementById("rule-length").className = rules.length ? "valid" : "invalid";
+            document.getElementById("rule-upper").className = rules.upper ? "valid" : "invalid";
+            document.getElementById("rule-lower").className = rules.lower ? "valid" : "invalid";
+            document.getElementById("rule-number").className = rules.number ? "valid" : "invalid";
+            document.getElementById("rule-special").className = rules.special ? "valid" : "invalid";
+
+            // limpa feedback de erro relacionado a senhas quando usuário digita
+            clearFeedback();
+            senhaInput.classList.remove("input-error");
+            confirmarInput.classList.remove("input-error");
+        });
+
+        confirmarInput.addEventListener("input", function() {
+            clearFeedback();
+            confirmarInput.classList.remove("input-error");
+            senhaInput.classList.remove("input-error");
+        });
+
+        function showFeedback(msg, isSuccess = false) {
+            feedback.textContent = msg;
+            feedback.style.color = isSuccess ? "#0a7" : "#b00020";
+            feedback.style.display = "block";
+        }
+
+        function clearFeedback() {
+            feedback.textContent = "";
+            feedback.style.display = "none";
+        }
+
+        async function redirectIfSession() {
+            try {
+                const res = await fetch('../backend/check_session.php', { cache: 'no-store' });
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.loggedIn) {
+                    window.location.href = 'trilha_cursos.html';
+                }
+            } catch (err) {
+                console.warn('Sessão verificação falhou', err);
+            }
+        }
+
+        redirectIfSession();
+
+        // Verifica se há mensagem de resultado no query string
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const success = params.get('success');
+            const error = params.get('error');
+
+            if (success) {
+                showFeedback(success, true);
+            } else if (error) {
+                showFeedback(error, false);
+            }
+
+            if (success || error) {
+                window.history.replaceState(null, '', window.location.pathname);
+            }
+        })();
+
+        form.addEventListener("submit", function(e) {
+            // checar campos obrigatórios (cliente) - evita enviar formulário incompleto
+            const requiredFields = form.querySelectorAll('input[required]');
+            for (const field of requiredFields) {
+                if (!field.value || field.value.trim() === "") {
+                    e.preventDefault();
+                    showFeedback("Por favor, preencha todos os campos obrigatórios.");
+                    field.focus();
+                    return;
+                }
+            }
+
+            // verificar se senhas batem
+            if (senhaInput.value !== confirmarInput.value) {
+                e.preventDefault();
+                showFeedback("As senhas não coincidem. Por favor, verifique.");
+                senhaInput.classList.add("input-error");
+                confirmarInput.classList.add("input-error");
+                confirmarInput.focus();
+                return;
+            }
+
+            // Se chegar aqui, validação cliente OK -> formulário será enviado para ../backend/cadastro.php
+            clearFeedback();
+        });
+    </script>
+
+</body>
+</html>

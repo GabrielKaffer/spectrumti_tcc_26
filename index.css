@@ -1,0 +1,613 @@
+    /* Cor de fundo */
+    body {
+        background-color: #1a2e3d;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Container com todas as outras div's */
+    .principalContainer {
+        display: flex;
+    }
+
+    .siteName {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #C9BAB0;
+    }
+
+    /* Div de título ajustada */
+    .titulo {
+        width: 50%;
+        /* Ocupa metade do container pai */
+        max-width: 50vw;
+        /* Garante que não passe da metade da tela */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .titulo h1 {
+        width: 100%;
+        /* O h1 ocupa o total da div pai (.titulo) */
+        color: #C9BAB0;
+        font-size: clamp(30px, 5vw, 65px);
+        /* Fonte responsiva: diminui em telas menores */
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 130px;
+        margin-left: 30px;
+        line-height: 1.1;
+        /* Melhora o espaçamento se o texto quebrar linha */
+    }
+
+    /* Div com o paragrafo abaixo do SPECTRUM TI */
+    .titulo p {
+        margin-left: 25px;
+        font-size: medium;
+        margin-top: -5px;
+        color: #C9BAB0;
+    }
+
+
+    /* botão */
+    .button-74 {
+        margin-left: 20px;
+        background-color: #C9BAB0;
+        border: 2px solid #422800;
+        border-radius: 0px;
+        box-shadow: black 4px 4px 0 0;
+        color: #12363F;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 0 18px;
+        line-height: 40px;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-74:hover {
+        background-color: #fff;
+    }
+
+    .button-74:active {
+        box-shadow: #422800 2px 2px 0 0;
+        transform: translate(2px, 2px);
+    }
+
+    @media (min-width: 768px) {
+        .button-74 {
+            min-width: 120px;
+            padding: 0 25px;
+        }
+    }
+
+    /* Imagem principal */
+    .img1 {
+        display: block;
+        border-radius: 5%;
+        height: auto;
+        width: 370px;
+        margin-left: 70px;
+        margin-top: 4%;
+    }
+
+    .foto-container .ftgb {
+        height: 140px;
+    }
+
+    /* Links da Navbar */
+
+    .navbar {
+        width: 100%;
+        display: flex;
+        gap: 40px;
+        justify-content: end;
+        font-size: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 20px;
+
+    }
+
+    .swiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    /* Cor das setas e bolinhas (usando sua cor bege) */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #C9BAB0 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #C9BAB0 !important;
+    }
+
+    /* Garante que o grid não quebre o swiper */
+    .swiper-slide {
+        display: block;
+    }
+
+    header,
+    siteName {
+        margin-top: 5px;
+        padding-right: 0px;
+        border-bottom: 3px solid white;
+        font-weight: bold;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    header .navbar a {
+        color: #C9BAB0;
+        text-decoration: none;
+    }
+
+    /* Seção Sobre Nós */
+    .sobre-nos {
+        padding: 80px 5%;
+        background-color: #1a2e3d;
+        /* Sua cor de fundo atual */
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .sobre-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        flex-wrap: wrap;
+    }
+
+    .sobre-content {
+        flex: 2;
+        min-width: 300px;
+    }
+
+    .sobre-titulo {
+        font-size: 42px;
+        color: #C9BAB0;
+        /* Sua cor secundária */
+        margin-bottom: 25px;
+        font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    }
+
+    .sobre-titulo span {
+        color: #fff;
+        border-bottom: 4px solid #C9BAB0;
+    }
+
+    .sobre-texto {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: #e0e0e0;
+        text-align: justify;
+    }
+
+    /* Destaque da ETEC */
+    .etec-info {
+        margin-top: 30px;
+        padding: 20px;
+        border-left: 4px solid #C9BAB0;
+        background-color: rgba(201, 186, 176, 0.1);
+    }
+
+    .etec-info p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #C9BAB0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Elemento Lateral (Caixa Decorativa) */
+    .sobre-decoracao {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .caixa-destaque {
+        width: 250px;
+        height: 250px;
+        border: 2px solid #C9BAB0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        transition: transform 0.3s;
+    }
+
+    .caixa-destaque:hover {
+        transform: rotate(5deg);
+    }
+
+    .ano-destaque {
+        font-size: 60px;
+        font-weight: bold;
+        color: #C9BAB0;
+    }
+
+    .caixa-destaque p {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .sobre-titulo {
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .sobre-container {
+            flex-direction: column;
+        }
+
+        .sobre-texto {
+            font-size: 16px;
+        }
+    }
+
+    /* Seção de Equipe */
+    .equipe-section {
+        padding: 100px 5%;
+        background-color: #1a2e3d;
+        /* Mantendo o padrão */
+        text-align: center;
+    }
+
+    .titulo-equipe {
+        font-size: 40px;
+        color: #C9BAB0;
+        margin-bottom: 10px;
+        font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    }
+
+    .titulo-equipe span {
+        color: #fff;
+    }
+
+    .subtitulo-equipe {
+        color: #e0e0e0;
+        margin-bottom: 50px;
+        font-size: 18px;
+    }
+
+    /* Grid de Layout */
+    .grid-equipe {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Estilo do Card */
+    .card-integrante {
+        
+        background: rgba(255, 255, 255, 0.05);
+        /* Efeito de transparência */
+        border: 1px solid rgba(201, 186, 176, 0.2);
+        border-radius: 15px;
+        padding: 30px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-integrante:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #C9BAB0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Foto do Integrante - Correção */
+    .foto-container {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        /* Faz o círculo na div */
+        border: 3px solid #C9BAB0;
+        padding: 0;
+        /* Removi o padding para a foto encostar na borda se quiser */
+        overflow: hidden;
+        /* Corta o que sobrar da imagem para ficar redonda */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .foto-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* ESSENCIAL: Ajusta a foto sem distorcer */
+        display: block;
+        filter: grayscale(100%);
+        transition: 0.4s;
+    }
+
+    .card-integrante:hover .foto-container img {
+        filter: grayscale(0%);
+    }
+
+    /* Texto do Card */
+    .info-integrante h3 {
+        color: #fff;
+        margin-bottom: 5px;
+        font-size: 22px;
+    }
+
+    .info-integrante span {
+        color: #C9BAB0;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .info-integrante p {
+        color: #ccc;
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    /* Links Sociais */
+    .redes-integrante a {
+        color: #C9BAB0;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: bold;
+        margin: 0 10px;
+        border: 1px solid #C9BAB0;
+        padding: 5px 12px;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .redes-integrante a:hover {
+        background-color: #C9BAB0;
+        color: #1a2e3d;
+    }
+
+    /* ===== CONTATO ===== */
+    .contato-section {
+        padding: 100px 5%;
+        background-color: #162a38;
+        color: #fff;
+        text-align: center;
+    }
+
+    .contato-titulo {
+        font-size: 40px;
+        color: #C9BAB0;
+        margin-bottom: 10px;
+        font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    }
+
+    .contato-titulo span {
+        color: #fff;
+    }
+
+    .contato-subtitulo {
+        color: #ccc;
+        margin-bottom: 50px;
+        font-size: 18px;
+    }
+
+    /* Layout */
+    .contato-content {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* FORM */
+    .contato-form {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 10px;
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border: 1px solid rgba(201, 186, 176, 0.2);
+    }
+
+    .contato-form input,
+    .contato-form textarea {
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .contato-form button {
+        background-color: #C9BAB0;
+        color: #1a2e3d;
+        border: none;
+        padding: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .contato-form button:hover {
+        background-color: #fff;
+    }
+
+    /* INFO */
+    .contato-info {
+        text-align: left;
+        max-width: 300px;
+    }
+
+    .contato-info h3 {
+        color: #C9BAB0;
+        margin-bottom: 15px;
+    }
+
+    .contato-info p {
+        margin-bottom: 10px;
+        color: #ddd;
+    }
+
+    /* SOCIAL */
+    .contato-social a {
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 10px;
+        padding: 8px 12px;
+        border: 1px solid #C9BAB0;
+        color: #C9BAB0;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .contato-social a:hover {
+        background-color: #C9BAB0;
+        color: #1a2e3d;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+        .contato-content {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contato-info {
+            text-align: center;
+        }
+    }
+
+    /* Estilização Geral do Rodapé */
+    .footer-spectrum {
+        background-color: #f8f9fa;
+        /* Fundo claro como o da imagem */
+        color: #333;
+        padding: 60px 0 20px 0;
+        font-family: Arial, sans-serif;
+        border-top: 1px solid #ddd;
+        margin-top: 50px;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .footer-col {
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 30px;
+    }
+
+    .footer-logo {
+        color: #1a2e3d;
+        /* Sua cor principal */
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .footer-logo span {
+        color: #C9BAB0;
+        /* Sua cor secundária */
+    }
+
+    .footer-col h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #1a2e3d;
+        position: relative;
+    }
+
+    /* Lista de Links */
+    .footer-col ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col ul li a {
+        color: #666;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+        color: #1a2e3d;
+        padding-left: 5px;
+    }
+
+    /* Ícones Sociais */
+    .social-icons a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background: #1a2e3d;
+        color: #fff;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 5px;
+        margin-right: 10px;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    /* Faixa de Copyright */
+    .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+        margin-top: 40px;
+        font-size: 13px;
+        color: #888;
+    }
+
+    /* Responsividade para Celular */
+    @media (max-width: 768px) {
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-col {
+            margin-bottom: 40px;
+        }
+    }
+
+    .footer-spectrum {
+        position: relative;
+        z-index: 9999;
+    }

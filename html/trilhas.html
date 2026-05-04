@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectrum - Gestão de Trilhas</title>
+    <link rel="stylesheet" href="../css/trilhas.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <h1>Spectrum</h1>
+            <span>Painel Administrativo</span>
+        </div>
+        <!-- Botão removido da Navbar conforme solicitado -->
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <div class="table-header">
+                <h2>Trilhas de Aprendizado</h2>
+                <!-- Botão agora posicionado aqui -->
+                <button id="btnNovaTrilha" class="btn-primary">+ Criar Nova Trilha</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagem</th>
+                            <th>Nome da Trilha</th>
+                            <th>Tag Relacionada</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaTrilhas">
+                        <!-- Conteúdo carregado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL PRINCIPAL -->
+    <div id="modalTrilha" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nova Trilha</h2>
+                <button type="button" class="close-modal" onclick="fecharModal()">&times;</button>
+            </div>
+            
+            <!-- Div de scroll para o conteúdo do formulário -->
+            <div class="modal-body">
+                <form id="formTrilha">
+                    <input type="hidden" id="trilha_id" name="id_trilha">
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome da Trilha</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: Masterizando PHP" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição Curta</label>
+                        <textarea id="descricao" name="descricao" rows="3" placeholder="Descreva o que o aluno aprenderá..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="img_url">URL da Imagem de Capa</label>
+                        <input type="text" id="img_url" name="img" placeholder="https://link-da-imagem.com">
+                        <div id="previewImg" class="img-preview">
+                            <span>Prévia da Imagem</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tag de Interesse</label>
+                            <div class="tag-selector-display">
+                                <span id="tagSelecionadaNome">Nenhuma selecionada</span>
+                                <input type="hidden" id="id_tag_interesse" name="id_tag_interesse">
+                                <button type="button" id="btnAbrirTags" class="btn-tag">Escolher Tag</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status da Trilha</label>
+                            <select id="status" name="status">
+                                <option value="0">0 – Criado (Rascunho)</option>
+                                <option value="1">1 – Ativo (Público)</option>
+                                <option value="3">3 – Inativo (Oculto)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="infoDatas" class="info-datas" style="display:none;">
+                        <p><strong>Criado em:</strong> <span id="data_criacao">--</span></p>
+                        <p><strong>Última atualização:</strong> <span id="updated_at">--</span></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+                <button type="submit" form="formTrilha" class="btn-primary">Salvar Dados</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE SELEÇÃO DE TAGS (POPUP) -->
+    <div id="modalTags" class="modal-secondary">
+        <div class="modal-content-small">
+            <h3>Selecione a Categoria</h3>
+            <div id="gridTags" class="grid-tags">
+                <!-- Tags carregadas via AJAX -->
+            </div>
+            <button type="button" onclick="fecharModalTags()" class="btn-cancel" style="width: 100%; margin-top: 15px;">Fechar</button>
+        </div>
+    </div>
+
+    <script src="../js/trilhas.js"></script>
+</body>
+</html>

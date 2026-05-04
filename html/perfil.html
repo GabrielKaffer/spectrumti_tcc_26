@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações de Perfil</title>
+    <link rel="stylesheet" href="../css/perfil.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Configurações</h2>
+            <ul>
+                <li class="active">Perfil</li>
+                <li>Segurança</li>
+                <li>Notificações</li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Editar Perfil</h1>
+            <hr>
+
+            <section class="settings-section">
+                <div class="input-group">
+                    <label for="nome">Nome de Usuário</label>
+                    <input type="text" id="nome" placeholder="Seu nome atual">
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Nova Senha</label>
+                    <input type="password" id="senha" placeholder="Digite a nova senha">
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h3>Aparência</h3>
+                <p>Escolha como prefere visualizar o site:</p>
+                <div class="theme-switch">
+                    <span>Modo Claro / Escuro</span>
+                    <button id="theme-toggle" class="btn-toggle">Alternar Tema</button>
+                </div>
+            </section>
+
+            <button class="btn-save">Salvar Alterações</button>
+        </main>
+    </div>
+
+    <script src="../js/perfil.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School - Gerenciar Tags</title>
+
+    <link rel="stylesheet" href="../css/tags.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/40" class="logo">
+            <span class="school-name">School</span>
+        </div>
+
+        <div class="user-profile">
+            <span>Olá, <strong id="user-name">Usuário</strong></span>
+            <div class="user-icon">👤</div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h2>Gerenciar Tags</h2>
+            <button class="btn-primary" onclick="openModal()">+ Nova Tag</button>
+        </div>
+
+        <div id="tags" class="tags-grid"></div>
+
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+
+            <h3>Nova Tag</h3>
+
+            <input type="hidden" id="id">
+
+            <input type="text" id="nome" placeholder="Nome da tag">
+            <input type="text" id="img" placeholder="URL da imagem">
+
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="save()">Salvar</button>
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/tags.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Curso</title>
+    <link rel="stylesheet" href="/css/exibicaoVideo.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <header class="course-header">
+            <nav class="breadcrumbs">
+                <a href="#">Home</a> /
+                <a href="#" id="trail-name">Trilha</a> /
+                <span id="course-number">01.</span> <span id="course-name-breadcrumb">Nome do Curso</span>
+            </nav>
+
+            <div class="title-section">
+                <h1 id="course-title-main">01. Carregando...</h1>
+                <div class="meta-info">
+                    <span class="duration"><i class="icon-clock"></i> 00:02:39</span>
+                    <span id="status-tag" class="badge">Em andamento</span>
+                </div>
+            </div>
+        </header>
+
+        <nav class="view-controls">
+            <button id="btn-video" class="active">Assistir Vídeo</button>
+            <button id="btn-text">Ler Conteúdo</button>
+        </nav>
+
+        <main id="content-area">
+        </main>
+
+        <section class="manual-input">
+            <input type="text" id="manual-url" placeholder="Cole um link do YouTube aqui">
+            <button id="btn-load-manual">Carregar Vídeo</button>
+        </section>
+
+        <footer class="course-footer">
+            <button id="btn-prev" class="btn-secondary">Voltar</button>
+            <button id="btn-next" class="btn-primary">Avançar / Concluir</button>
+        </footer>
+    </div>
+
+    <script src="/js/exibicaoVideo.js"></script>
+</body>
+
+</html>
