@@ -116,3 +116,20 @@ CREATE TABLE meusInteresses (
 
     UNIQUE (id_user, id_trilha)
 );
+
+-- ========================================
+-- TABELA: CERTIFICADO
+-- ========================================
+CREATE TABLE certificados (
+    id_certificado INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    nome_usuario VARCHAR(150) NOT NULL,
+    id_trilha INT NOT NULL,
+    nome_trilha VARCHAR(150) NOT NULL,
+    duracao INT NOT NULL COMMENT 'Duração total em minutos, representada em números cardinais',
+    data_conclusao DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_user) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_trilha) REFERENCES trilha(id_trilha) ON DELETE CASCADE
+);
