@@ -21,7 +21,7 @@ function atualizarPreview(url) {
 async function listarTrilhas(p = 1) {
     paginaAtual = p;
     try {
-        const res = await fetch(`../backend/edit_trilha_controller.php?action=list&p=${paginaAtual}`);
+        const res = await fetch(`../backend/edit_trilha.php?action=list&p=${paginaAtual}`);
         const response = await res.json();
         const data = response.dados;
         const statusTxt = { 0: 'Criado', 1: 'Ativo', 3: 'Inativo' };
@@ -37,9 +37,7 @@ async function listarTrilhas(p = 1) {
                         <td>${t.nome_tag || '---'}</td>
                         <td><span class="badge st-${t.status}">${statusTxt[t.status]}</span></td>
                         <td style="text-align: right; white-space: nowrap;">
-                            <!-- NOVO BOTÃO: ACESSAR AULAS -->
-                            <a href="edit_curso.html?id_trilha=${t.id_trilha}" class="btn-tag" style="text-decoration: none; display: inline-block; margin-right: 5px;">Aulas</a>
-                            
+                            <a href="edit_curso.html?id_trilha=${t.id_trilha}" class="btn-tag" style="margin-right: 5px;">Aulas</a>
                             <button onclick='abrirModal(${JSON.stringify(t)})' class="btn-edit">Editar</button>
                             <button onclick="deletarTrilha(${t.id_trilha})" class="btn-del">Excluir</button>
                         </td>
@@ -48,19 +46,24 @@ async function listarTrilhas(p = 1) {
         } else {
             html = '<tr><td colspan="6" style="text-align:center; padding: 20px;">Nenhuma trilha encontrada.</td></tr>';
         }
+
         document.getElementById('listaTrilhas').innerHTML = html;
         renderizarPaginacao(response.totalPaginas, response.pagina);
-    } catch (e) { console.error("Erro ao listar:", e); }
+
+    } catch (e) {
+        console.error("Erro ao listar:", e);
+    }
 }
 
 function renderizarPaginacao(totalPaginas, paginaAtiva) {
     let html = `
         <div class="paginacao-container">
-            <button onclick="listarTrilhas(${paginaAtiva - 1})" ${paginaAtiva <= 1 ? 'disabled' : ''} class="btn-pag">Anterior</button>
-            <span class="pag-info">Página ${paginaAtiva} de ${totalPaginas}</span>
-            <button onclick="listarTrilhas(${paginaAtiva + 1})" ${paginaAtiva >= totalPaginas ? 'disabled' : ''} class="btn-pag">Próxima</button>
+            <button onclick="listarTrilhas(${paginaAtiva - 1})" ${paginaAtiva <= 1 ? 'disabled' : ''}>Anterior</button>
+            <span>Página ${paginaAtiva} de ${totalPaginas}</span>
+            <button onclick="listarTrilhas(${paginaAtiva + 1})" ${paginaAtiva >= totalPaginas ? 'disabled' : ''}>Próxima</button>
         </div>
     `;
+
     let pagDiv = document.getElementById('paginacao');
     if(!pagDiv) {
         pagDiv = document.createElement('div');
@@ -74,6 +77,7 @@ function abrirModal(dados = null) {
     const form = document.getElementById('formTrilha');
     form.reset();
     atualizarPreview('');
+
     if (dados) {
         document.getElementById('modalTitle').innerText = "Editar: " + dados.nome;
         document.getElementById('trilha_id').value = dados.id_trilha;
@@ -93,35 +97,48 @@ function abrirModal(dados = null) {
         document.getElementById('infoDatas').style.display = 'none';
         document.getElementById('tagSelecionadaNome').innerText = 'Nenhuma selecionada';
     }
+
     document.getElementById('modalTrilha').style.display = 'block';
 }
 
-function fecharModal() { document.getElementById('modalTrilha').style.display = 'none'; }
+function fecharModal() {
+    document.getElementById('modalTrilha').style.display = 'none';
+}
 
 async function salvarTrilha(e) {
     e.preventDefault();
-    const res = await fetch('../backend/edit_trilha_controller.php?action=save', {
+
+    const res = await fetch('../backend/edit_trilha.php?action=save', {
         method: 'POST',
         body: new FormData(e.target)
     });
+
     const result = await res.json();
-    if (result.success) { fecharModal(); listarTrilhas(paginaAtual); } else { alert(result.error); }
+
+    if (result.success) {
+        fecharModal();
+        listarTrilhas(paginaAtual);
+    } else {
+        alert(result.error);
+    }
 }
 
 async function deletarTrilha(id) {
     if(confirm('Excluir trilha?')) {
-        await fetch(`../backend/edit_trilha_controller.php?action=delete&id=${id}`);
+        await fetch(`../backend/edit_trilha.php?action=delete&id=${id}`);
         listarTrilhas(paginaAtual);
     }
 }
 
 document.getElementById('btnAbrirTags').onclick = async () => {
-    const res = await fetch('../backend/edit_trilha_controller.php?action=list_tags');
+    const res = await fetch('../backend/edit_trilha.php?action=list_tags');
     const tags = await res.json();
+
     let html = '';
     tags.forEach(tag => {
         html += `<div class="tag-item" onclick="selecionarTag(${tag.id}, '${tag.nome}')">${tag.nome}</div>`;
     });
+
     document.getElementById('gridTags').innerHTML = html;
     document.getElementById('modalTags').style.display = 'block';
 };
@@ -131,4 +148,7 @@ function selecionarTag(id, nome) {
     document.getElementById('tagSelecionadaNome').innerText = nome;
     document.getElementById('modalTags').style.display = 'none';
 }
-function fecharModalTags() { document.getElementById('modalTags').style.display = 'none'; }
+
+function fecharModalTags() {
+    document.getElementById('modalTags').style.display = 'none';
+}

@@ -13,10 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnExcluirAula').onclick = excluirAula;
     
     document.getElementById('aula_video').oninput = (e) => mostrarPreviewVideo(e.target.value);
+
+    document.getElementById('user-icon').onclick = () => {
+        const drop = document.getElementById('user-dropdown');
+        drop.style.display = drop.style.display === 'block' ? 'none' : 'block';
+    };
 });
 
 async function carregarDadosTrilha() {
-    // Busca os dados da trilha para exibir no header
     const res = await fetch(`../backend/edit_trilha_controller.php?action=list`);
     const response = await res.json();
     const trilha = response.dados.find(t => t.id_trilha == idTrilha);
@@ -38,7 +42,7 @@ async function listarAulas() {
                 <h4>${aula.nome}</h4>
             </div>`;
     });
-    document.getElementById('listaAulas').innerHTML = html || '<p style="font-size:0.8rem;color:#999;">Nenhuma aula cadastrada.</p>';
+    document.getElementById('listaAulas').innerHTML = html || '<p>Nenhuma aula cadastrada.</p>';
 }
 
 function selecionarAula(aula) {
@@ -83,7 +87,7 @@ function mostrarPreviewVideo(url) {
 
     if (videoId) {
         container.style.display = 'block';
-        container.innerHTML = `<iframe src="https://www.youtube.com{videoId}" frameborder="0" allowfullscreen></iframe>`;
+        container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
     } else {
         container.style.display = 'none';
     }

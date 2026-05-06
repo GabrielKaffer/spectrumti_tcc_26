@@ -23,7 +23,7 @@ $userId = $_SESSION['user_id'];
 
 // verifica nivel
 $stmt = $conn->prepare("SELECT nivel FROM usuarios WHERE id = ?");
-$stmt->bind_param("i", $userId);
+$stmt->bind_param("s", $userId);
 $stmt->execute();
 $res = $stmt->get_result()->fetch_assoc();
 

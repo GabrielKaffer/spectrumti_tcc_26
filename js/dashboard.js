@@ -45,7 +45,6 @@ function toggleFavorito(id, el) {
     });
 }
 
-// 🔥 NOVO
 function formatarDuracao(minutos) {
     const horas = Math.floor(minutos / 60);
     const mins = minutos % 60;
@@ -110,7 +109,7 @@ function renderTrilhas(lista, containerId) {
 
                 <span class="tag">${trilha.nome_tag ?? "Sem categoria"}</span>
 
-                <!-- 🔥 NOVA LINHA -->
+
                 <div style="display:flex; justify-content:space-between; font-size:13px; margin-top:5px;">
                     <span>Aulas: ${trilha.total_aulas || 0}</span>
                     <span>Duração: ${duracaoFormatada}</span>
@@ -129,7 +128,7 @@ function renderTrilhas(lista, containerId) {
                     ${statusInfo.texto}
                 </span>
 
-                <a class="btn-access" href="trilha_detalhe.html?id=${trilha.id_trilha}">
+                <a class="btn-access" href="detalhes_da_trilha.html?id=${trilha.id_trilha}">
                     Acessar
                 </a>
 

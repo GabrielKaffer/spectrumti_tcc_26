@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School - Aula</title>
+    <link rel="stylesheet" href="../css/aula.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../Imagens/logo.png" alt="Logo" class="logo">
+                <span class="school-name">SpectrumTI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="trilha_cursos.html">Minha Página</a>
+                <a href="#">Meus Certificados</a>
+                <a href="#">Ensine na Spectrum</a>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span>Olá,</span>
+                <strong id="user-name">Usuário</strong>
+            </div>
+            <div id="user-icon" class="user-icon">👤</div>
+            <div id="user-dropdown" class="user-dropdown">
+                <a href="perfil.html">Perfil</a>
+                <a href="../backend/logout.php">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <section id="aula-container" class="aula-container">
+
+            <div class="aula-topo">
+                <span id="aula-trilha" class="aula-trilha">Trilha</span>
+                <h1 id="aula-nome">Carregando aula...</h1>
+                <p id="aula-descricao"></p>
+            </div>
+
+            <div class="aula-tabs">
+                <button id="btn-video" class="tab-btn active" type="button" onclick="mostrarVideo()">Vídeo</button>
+                <button id="btn-texto" class="tab-btn" type="button" onclick="mostrarTexto()">Texto da aula</button>
+            </div>
+
+            <section id="area-video" class="conteudo-aula active">
+                <div class="video-wrapper">
+                    <iframe id="aula-video" src="" title="Vídeo da aula" allowfullscreen></iframe>
+                </div>
+            </section>
+
+            <section id="area-texto" class="conteudo-aula">
+                <article id="aula-texto" class="aula-texto"></article>
+            </section>
+
+            <div class="aula-actions">
+                <button id="btn-voltar" class="btn-secundario" type="button">Voltar para trilha</button>
+                <button id="btn-concluir" class="btn-concluir" type="button" onclick="concluirAula()">Concluir</button>
+            </div>
+
+        </section>
+
+        <section id="certificado-container" class="certificado-container" style="display:none;">
+            <div class="certificado-card">
+                <span class="certificado-label">Trilha concluída</span>
+                <h1>Parabéns!</h1>
+                <p id="certificado-mensagem">
+                    Você concluiu todos os cursos ativos desta trilha.
+                </p>
+
+                <div class="certificado-actions">
+                    <button id="btn-voltar-certificado" class="btn-secundario" type="button">Voltar para trilha</button>
+                    <a id="btn-acessar-certificado" class="btn-concluir" href="#">Acessar certificado</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/aula.js"></script>
+
+</body>
+
+</html>

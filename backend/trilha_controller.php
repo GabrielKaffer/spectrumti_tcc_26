@@ -1,28 +1,24 @@
 <?php
 ob_start();
-session_start();
 
-// SIMULA LOGIN (REMOVER DEPOIS)
-$_SESSION['user_id'] = 1;
-$_SESSION['nivel'] = 0;
-
-// require_once 'check_session.php';
+require_once 'check_session.php';
 
 ob_clean();
 
 header('Content-Type: application/json; charset=utf-8');
 
-// Conexão
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "gabrielkafferDS";
+$password = "gabrielkafferDS123@";
 $database = "spectrum";
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
 
-    if (!isset($_SESSION['user_id'])) {
+    $sessao = validarSessaoUsuario();
+
+    if (empty($sessao['loggedIn']) || empty($sessao['user']['id'])) {
         echo json_encode(['success' => false, 'error' => 'Sessão inválida']);
         exit;
     }
@@ -31,9 +27,9 @@ try {
     $conn->set_charset("utf8mb4");
 
     $action = $_GET['action'] ?? '';
-    $user_id = $_SESSION['user_id'];
+    $user_id = (int) $sessao['user']['id'];
+    $nivel = (int) $sessao['user']['nivel'];
 
-    // 🔥 FUNÇÃO NOVA (AULAS + DURAÇÃO)
     function adicionarInfoCursos($lista, $conn) {
         foreach ($lista as &$item) {
 
@@ -55,11 +51,26 @@ try {
         return $lista;
     }
 
+    function marcarFavoritos($lista, $conn, $user_id) {
+        foreach ($lista as &$item) {
+            $stmt = $conn->prepare("
+                SELECT 1 
+                FROM meusinteresses 
+                WHERE id_user = ? AND id_trilha = ?
+                LIMIT 1
+            ");
+            $stmt->bind_param("ii", $user_id, $item['id_trilha']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $item['favorito'] = $result->num_rows > 0 ? 1 : 0;
+        }
+        return $lista;
+    }
+
     switch ($action) {
 
         case 'dashboard':
 
-            // MINHAS TRILHAS
             $sql = "
                 SELECT t.*, i.nome as nome_tag, p.status as progresso_status
                 FROM trilha t
@@ -74,7 +85,6 @@ try {
             $stmt->execute();
             $em_andamento = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            // RECOMENDADOS
             $sql = "
                 SELECT t.*, i.nome as nome_tag, p.status as progresso_status
                 FROM trilha t
@@ -94,7 +104,6 @@ try {
             $stmt->execute();
             $recomendados = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            // INTERESSES
             $sql = "
                 SELECT t.*, i.nome as nome_tag, p.status as progresso_status
                 FROM trilha t
@@ -110,28 +119,10 @@ try {
             $stmt->execute();
             $interesses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-            // FAVORITOS
-            function marcarFavoritos($lista, $conn, $user_id) {
-                foreach ($lista as &$item) {
-                    $stmt = $conn->prepare("
-                        SELECT 1 
-                        FROM meusinteresses 
-                        WHERE id_user = ? AND id_trilha = ?
-                        LIMIT 1
-                    ");
-                    $stmt->bind_param("ii", $user_id, $item['id_trilha']);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $item['favorito'] = $result->num_rows > 0 ? 1 : 0;
-                }
-                return $lista;
-            }
-
             $em_andamento = marcarFavoritos($em_andamento, $conn, $user_id);
             $recomendados = marcarFavoritos($recomendados, $conn, $user_id);
             $interesses = marcarFavoritos($interesses, $conn, $user_id);
 
-            // 🔥 ADICIONA AULAS E DURAÇÃO
             $em_andamento = adicionarInfoCursos($em_andamento, $conn);
             $recomendados = adicionarInfoCursos($recomendados, $conn);
             $interesses = adicionarInfoCursos($interesses, $conn);
@@ -146,7 +137,12 @@ try {
 
         case 'toggle_favorito':
 
-            $id_trilha = $_POST['id_trilha'] ?? 0;
+            $id_trilha = (int) ($_POST['id_trilha'] ?? 0);
+
+            if ($id_trilha <= 0) {
+                echo json_encode(['success' => false, 'error' => 'Trilha inválida']);
+                exit;
+            }
 
             $stmt = $conn->prepare("
                 SELECT id_trilha 
@@ -198,6 +194,22 @@ try {
                 'dados' => $result->fetch_all(MYSQLI_ASSOC)
             ]);
         break;
+
+        case 'list_tags':
+
+            $result = $conn->query("SELECT id_interesse as id, nome FROM tag_interesse ORDER BY nome ASC");
+            $tags = [];
+
+            if ($result) {
+                $tags = $result->fetch_all(MYSQLI_ASSOC);
+            }
+
+            echo json_encode($tags ?: []);
+        break;
+
+        default:
+            echo json_encode(['success' => false, 'error' => 'Ação inválida']);
+        break;
     }
 
     $conn->close();
@@ -207,3 +219,4 @@ try {
 }
 
 ob_end_flush();
+?>

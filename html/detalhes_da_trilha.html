@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School - Detalhes da Trilha</title>
+    <link rel="stylesheet" href="../css/detalhes_da_trilha.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../Imagens/logo.png" alt="Logo" class="logo">
+                <span class="school-name">SpectrumTI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="trilha_cursos.html">Minha Página</a>
+                <a href="#">Meus Certificados</a>
+                <a href="#">Ensine na Spectrum</a>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span>Olá,</span>
+                <strong id="user-name">Usuário</strong>
+            </div>
+            <div id="user-icon" class="user-icon">👤</div>
+            <div id="user-dropdown" class="user-dropdown">
+                <a href="perfil.html">Perfil</a>
+                <a href="../backend/logout.php">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <section class="trilha-hero">
+
+            <div class="trilha-info">
+                <span id="trilha-tag" class="trilha-tag">Categoria</span>
+                <h1 id="trilha-nome">Carregando...</h1>
+                <p id="trilha-descricao" class="trilha-descricao"></p>
+            </div>
+
+            <aside class="trilha-side">
+
+                <div class="favorito-area">
+                    <button id="btn-favorito" class="btn-favorito" type="button">
+                        <img id="favorito-img" src="../Imagens/heart.png" alt="Favorito">
+                    </button>
+                </div>
+
+                <div class="trilha-metricas">
+                    <div class="metrica">
+                        <span class="metrica-label">Duração</span>
+                        <strong id="trilha-duracao">0h</strong>
+                    </div>
+
+                    <div class="metrica-divisor"></div>
+
+                    <div class="metrica">
+                        <span class="metrica-label">Cursos</span>
+                        <strong id="trilha-cursos">0</strong>
+                    </div>
+                </div>
+
+                <div class="trilha-acao" id="trilha-acao"></div>
+
+            </aside>
+
+        </section>
+
+        <section class="cursos-area">
+            <h2>Cursos da trilha</h2>
+            <div id="lista-cursos" class="lista-cursos"></div>
+        </section>
+
+    </main>
+
+    <script src="../js/detalhes_da_trilha.js?v=2"></script>
+
+</body>
+
+</html>

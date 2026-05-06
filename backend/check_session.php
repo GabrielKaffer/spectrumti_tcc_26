@@ -1,68 +1,81 @@
 ﻿<?php
-session_start();
-header('Content-Type: application/json; charset=utf-8');
-
-$response = [
-    'loggedIn' => false
-];
-
-// verifica se está logado
-if (!empty($_SESSION['user_id'])) {
-
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $database = "spectrum";
-
-    $conn = new mysqli($host, $user, $password, $database);
-
-    if ($conn->connect_error) {
-        $response['error'] = 'Erro na conexão com banco';
-        echo json_encode($response);
-        exit;
-    }
-
-    $userId = $_SESSION['user_id'];
-
-    $stmt = $conn->prepare("
-        SELECT 
-            id,
-            nome,
-            email,
-            apelido,
-            nivel
-        FROM usuarios 
-        WHERE id = ?
-    ");
-
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $userData = $result->fetch_assoc();
-
-    if ($userData) {
-
-        // atualiza sessão com nivel
-        $_SESSION['nivel'] = $userData['nivel'];
-
-        $response['loggedIn'] = true;
-        $response['user'] = [
-            'id' => $userData['id'],
-            'nome' => $userData['nome'],
-            'email' => $userData['email'],
-            'apelido' => $userData['apelido'],
-            'nivel' => $userData['nivel']
-        ];
-
-    } else {
-        // usuário não encontrado
-        session_destroy();
-    }
-
-    $stmt->close();
-    $conn->close();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-echo json_encode($response);
+function validarSessaoUsuario()
+{
+    $response = [
+        'loggedIn' => false
+    ];
+
+    if (empty($_SESSION['user_id'])) {
+        return $response;
+    }
+
+    $host = "localhost";
+    $user = "gabrielkafferDS";
+    $password = "gabrielkafferDS123@";
+    $database = "spectrum";
+
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+    try {
+        $conn = new mysqli($host, $user, $password, $database);
+        $conn->set_charset("utf8mb4");
+
+        $userId = (int) $_SESSION['user_id'];
+
+        $stmt = $conn->prepare("
+            SELECT 
+                id,
+                nome,
+                email,
+                apelido,
+                nivel
+            FROM usuarios 
+            WHERE id = ?
+            LIMIT 1
+        ");
+
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $userData = $result->fetch_assoc();
+
+        if ($userData) {
+            $_SESSION['user_id'] = $userData['id'];
+            $_SESSION['user_nome'] = $userData['nome'];
+            $_SESSION['user_email'] = $userData['email'];
+            $_SESSION['nivel'] = $userData['nivel'];
+
+            $response['loggedIn'] = true;
+            $response['user'] = [
+                'id' => $userData['id'],
+                'nome' => $userData['nome'],
+                'email' => $userData['email'],
+                'apelido' => $userData['apelido'],
+                'nivel' => $userData['nivel']
+            ];
+        } else {
+            session_unset();
+            session_destroy();
+        }
+
+        $stmt->close();
+        $conn->close();
+
+    } catch (Exception $e) {
+        $response['error'] = 'Erro ao validar sessão';
+    }
+
+    return $response;
+}
+
+if (basename($_SERVER['SCRIPT_FILENAME']) === basename(__FILE__)) {
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(validarSessaoUsuario());
+    exit;
+}
 ?>

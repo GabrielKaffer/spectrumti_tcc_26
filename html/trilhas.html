@@ -13,14 +13,12 @@
             <h1>Spectrum</h1>
             <span>Painel Administrativo</span>
         </div>
-        <!-- Botão removido da Navbar conforme solicitado -->
     </header>
 
     <main class="container">
         <div class="card">
             <div class="table-header">
                 <h2>Trilhas de Aprendizado</h2>
-                <!-- Botão agora posicionado aqui -->
                 <button id="btnNovaTrilha" class="btn-primary">+ Criar Nova Trilha</button>
             </div>
             <div class="table-container">
@@ -51,7 +49,6 @@
                 <button type="button" class="close-modal" onclick="fecharModal()">&times;</button>
             </div>
             
-            <!-- Div de scroll para o conteúdo do formulário -->
             <div class="modal-body">
                 <form id="formTrilha">
                     <input type="hidden" id="trilha_id" name="id_trilha">
@@ -108,13 +105,10 @@
         </div>
     </div>
 
-    <!-- MODAL DE SELEÇÃO DE TAGS (POPUP) -->
     <div id="modalTags" class="modal-secondary">
         <div class="modal-content-small">
             <h3>Selecione a Categoria</h3>
-            <div id="gridTags" class="grid-tags">
-                <!-- Tags carregadas via AJAX -->
-            </div>
+            <div id="gridTags" class="grid-tags"></div>
             <button type="button" onclick="fecharModalTags()" class="btn-cancel" style="width: 100%; margin-top: 15px;">Fechar</button>
         </div>
     </div>

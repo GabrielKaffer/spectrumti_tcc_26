@@ -3,8 +3,8 @@ session_start();
 
 
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "gabrielkafferDS";
+$password = "gabrielkafferDS123@";
 $database = "spectrum";
 
 $conn = new mysqli($host, $user, $password, $database);
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt = $conn->prepare("SELECT id, nome, senha FROM usuarios WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, nome, senha, nivel FROM usuarios WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
 
@@ -41,12 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // 🔥 CRIA NOVA SESSÃO LIMPA
+
     session_regenerate_id(true);
 
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_nome'] = $user['nome'];
     $_SESSION['user_email'] = $email;
+    $_SESSION['nivel'] = $user['nivel'];
 
     header("Location: ../html/trilha_cursos.html");
     exit;
