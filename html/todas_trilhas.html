@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School - Todas as Trilhas</title>
+    <link rel="stylesheet" href="../css/todas_trilhas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../Imagens/logo.png" alt="Logo" class="logo">
+                <span class="school-name">SpectrumTI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="trilha_cursos.html">Minha Página</a>
+                <a href="#">Meus Certificados</a>
+                <a href="#">Ensine na Spectrum</a>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span>Olá,</span>
+                <strong id="user-name">Usuário</strong>
+            </div>
+            <div id="user-icon" class="user-icon">👤</div>
+            <div id="user-dropdown" class="user-dropdown">
+                <a href="perfil.html">Perfil</a>
+                <a href="../backend/logout.php">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── TOOLBAR: busca + filtros ── -->
+    <div class="toolbar">
+        <div class="search-wrap">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="search-input" placeholder="Buscar trilha por nome ou descrição…">
+        </div>
+
+        <button class="btn-filter" id="btn-filter">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+                <line x1="11" y1="18" x2="13" y2="18"/>
+            </svg>
+            Filtros
+            <span class="badge-count" id="filter-badge" style="display:none">0</span>
+        </button>
+
+        <span class="results-info" id="results-info">— trilhas encontradas</span>
+    </div>
+
+    <!-- ── PAINEL DE FILTROS ── -->
+    <div class="filter-panel" id="filter-panel">
+        <div class="filter-inner">
+
+            <div class="filter-group">
+                <label>Categoria</label>
+                <div class="chip-group" id="chips-tag">
+                    <span class="chip selected" data-val="">Todas</span>
+                    <!-- preenchido via JS -->
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Duração</label>
+                <div class="chip-group" id="chips-duracao">
+                    <span class="chip selected" data-val="">Qualquer</span>
+                    <span class="chip" data-val="short">Até 2h</span>
+                    <span class="chip" data-val="medium">2h – 8h</span>
+                    <span class="chip" data-val="long">Mais de 8h</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Favoritos</label>
+                <div class="chip-group" id="chips-fav">
+                    <span class="chip selected" data-val="">Todos</span>
+                    <span class="chip" data-val="1">Apenas favoritos ♥</span>
+                </div>
+            </div>
+
+            <button class="btn-clear" id="btn-clear-filters">Limpar filtros</button>
+        </div>
+    </div>
+
+    <main class="main-content">
+
+        <section class="course-section">
+            <h2 class="section-title">Todas as Trilhas</h2>
+
+            <!-- skeleton enquanto carrega -->
+            <div id="loading-grid" class="loading-grid">
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+            </div>
+
+            <div class="cards-grid" id="grid-trilhas" style="display:none"></div>
+        </section>
+
+    </main>
+
+    <script src="../js/todas_trilhas.js"></script>
+
+</body>
+
+</html>

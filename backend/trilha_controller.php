@@ -178,7 +178,42 @@ try {
             }
 
         break;
+/**
+ * TRECHO A ADICIONAR no switch($action) do trilha_controller.php
+ * Logo antes do case 'list':
+ */
 
+case 'todas_trilhas':
+
+    $sql = "
+        SELECT 
+            t.*,
+            i.nome AS nome_tag,
+            p.status AS progresso_status,
+            COUNT(c.id_curso) AS total_aulas,
+            COALESCE(SUM(c.duracao), 0) AS total_duracao,
+            IF(mi.id_trilha IS NOT NULL, 1, 0) AS favorito
+        FROM trilha t
+        LEFT JOIN tag_interesse i       ON t.id_tag_interesse = i.id_interesse
+        LEFT JOIN progresso_trilha p    ON p.id_trilha = t.id_trilha AND p.id_user = ?
+        LEFT JOIN cursos c              ON c.id_trilha = t.id_trilha AND c.status = 1
+        LEFT JOIN meusinteresses mi     ON mi.id_trilha = t.id_trilha AND mi.id_user = ?
+        WHERE t.status = 1
+        GROUP BY t.id_trilha
+        ORDER BY t.nome ASC
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $user_id, $user_id);
+    $stmt->execute();
+    $todas = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    echo json_encode([
+        'success' => true,
+        'dados'   => $todas
+    ]);
+
+break;
         case 'list':
 
             $sql = "
