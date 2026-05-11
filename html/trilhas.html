@@ -3,18 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectrum - Gestão de Trilhas</title>
+    <title>Spectrum – Gestão de Trilhas</title>
     <link rel="stylesheet" href="../css/trilhas.css">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="logo">
-            <h1>Spectrum</h1>
-            <span>Painel Administrativo</span>
+    <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <img src="../Imagens/logo.png" alt="Logo" class="logo">
+                <span class="school-name">SpectrumTI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="trilhas.html" class="active">Minhas Trilhas</a>
+                <a href="todas_trilhas.html">Outras Trilhas</a>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-info">
+                <span>Olá,</span>
+                <strong id="user-name">Usuário</strong>
+            </div>
+            <div id="user-icon" class="user-icon">👤</div>
+            <div id="user-dropdown" class="user-dropdown">
+                <a href="perfil.html">Perfil</a>
+                <a href="../backend/logout.php">Sair</a>
+            </div>
         </div>
     </header>
 
+    <!-- ═══════════════════════════ CONTEÚDO ═══════════════════════════ -->
     <main class="container">
         <div class="card">
             <div class="table-header">
@@ -30,29 +50,30 @@
                             <th>Nome da Trilha</th>
                             <th>Tag Relacionada</th>
                             <th>Status</th>
-                            <th style="text-align: right;">Ações</th>
+                            <th style="text-align:right;">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="listaTrilhas">
-                        <!-- Conteúdo carregado via JavaScript -->
+                        <tr><td colspan="6" style="text-align:center;padding:30px;">Carregando...</td></tr>
                     </tbody>
                 </table>
             </div>
+            <!-- paginação inserida via JS aqui -->
         </div>
     </main>
 
-    <!-- MODAL PRINCIPAL -->
+    <!-- ═══════════════════════════ MODAL PRINCIPAL ═══════════════════════════ -->
     <div id="modalTrilha" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Nova Trilha</h2>
                 <button type="button" class="close-modal" onclick="fecharModal()">&times;</button>
             </div>
-            
+
             <div class="modal-body">
                 <form id="formTrilha">
                     <input type="hidden" id="trilha_id" name="id_trilha">
-                    
+
                     <div class="form-group">
                         <label for="nome">Nome da Trilha</label>
                         <input type="text" id="nome" name="nome" placeholder="Ex: Masterizando PHP" required>
@@ -88,6 +109,9 @@
                                 <option value="1">1 – Ativo (Público)</option>
                                 <option value="3">3 – Inativo (Oculto)</option>
                             </select>
+                            <small id="statusAviso" style="color:#c0392b;font-size:0.78rem;display:none;">
+                                ⚠️ Status Ativo só é permitido se houver ao menos um curso ativo nesta trilha.
+                            </small>
                         </div>
                     </div>
 
@@ -100,19 +124,20 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn-cancel" onclick="fecharModal()">Cancelar</button>
-                <button type="submit" form="formTrilha" class="btn-primary">Salvar Dados</button>
+                <button type="submit" form="formTrilha" id="btnSalvar" class="btn-primary">Salvar Dados</button>
             </div>
         </div>
     </div>
 
+    <!-- ═══════════════════════════ MODAL TAGS ═══════════════════════════ -->
     <div id="modalTags" class="modal-secondary">
         <div class="modal-content-small">
             <h3>Selecione a Categoria</h3>
             <div id="gridTags" class="grid-tags"></div>
-            <button type="button" onclick="fecharModalTags()" class="btn-cancel" style="width: 100%; margin-top: 15px;">Fechar</button>
+            <button type="button" onclick="fecharModalTags()" class="btn-cancel" style="width:100%;margin-top:15px;">Fechar</button>
         </div>
     </div>
 
-    <script src="../js/trilhas.js"></script>
+    <script src="../js/edit_trilha.js"></script>
 </body>
 </html>
